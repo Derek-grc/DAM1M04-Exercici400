@@ -59,3 +59,17 @@ button {
   margin-top: 16px;
   min-height: 28px;
 }
+
+.casella {
+  height: var(--mida);
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: var(--mida);
+  z-index: 10;
+}
+
+.casella:hover {
+  background: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
