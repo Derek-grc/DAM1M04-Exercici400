@@ -49,6 +49,11 @@ function init() {
       refTauler.appendChild(casella)
     }
   }
+
+  const refReset = document.getElementById("btnReinici")
+  refReset.addEventListener("click", reinicia)
+
+  reinicia()
 }
 
 function trobaBuit() {
@@ -80,6 +85,23 @@ function clicCasella(fila, columna) {
 
   moviments++
   actualitzaDOM()
+
+  if (comprovaResolt()) {
+    resolt = true
+    document.getElementById("missatge").textContent =
+      `Puzzle resolt en ${moviments} moviments!`
+  }
+}
+
+function comprovaResolt() {
+  for (let fila = 0; fila < numFiles; fila++) {
+    for (let columna = 0; columna < numColumnes; columna++) {
+      if (tauler[fila][columna] !== ESTAT_RESOLT[fila][columna]) {
+        return false
+      }
+    }
+  }
+  return true
 }
 
 function actualitzaDOM() {
@@ -95,4 +117,47 @@ function actualitzaDOM() {
   }
 
   document.getElementById("info").textContent = `Moviments: ${moviments}`
+}
+
+function barejaTauler() {
+  tauler = ESTAT_RESOLT.map(fila => [...fila])
+
+  let ultimDireccio = -1
+
+  for (let i = 0; i < 200; i++) {
+    const buit = trobaBuit()
+
+    const direccions = [
+      { df: -1, dc: 0, id: 0 },
+      { df: 1, dc: 0, id: 1 },
+      { df: 0, dc: -1, id: 2 },
+      { df: 0, dc: 1, id: 3 }
+    ]
+
+    const oposades = [1, 0, 3, 2]
+
+    const valides = direccions.filter(d => {
+      const nf = buit.fila + d.df
+      const nc = buit.columna + d.dc
+      return nf >= 0 && nf < numFiles &&
+             nc >= 0 && nc < numColumnes &&
+             d.id !== oposades[ultimDireccio]
+    })
+
+    const d = valides[Math.floor(Math.random() * valides.length)]
+    const nf = buit.fila + d.df
+    const nc = buit.columna + d.dc
+
+    tauler[buit.fila][buit.columna] = tauler[nf][nc]
+    tauler[nf][nc] = 0
+    ultimDireccio = d.id
+  }
+}
+
+function reinicia() {
+  barejaTauler()
+  moviments = 0
+  resolt = false
+  document.getElementById("missatge").textContent = ""
+  actualitzaDOM()
 }
