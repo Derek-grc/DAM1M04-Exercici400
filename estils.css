@@ -35,31 +35,6 @@ h1 {
   width: calc(var(--mida) * var(--columnes));
 }
 
-.controls {
-  align-items: center;
-  display: flex;
-  gap: 12px;
-  margin-top: 15px;
-}
-
-button {
-  background: #111827;
-  border: 0;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-  font-weight: 800;
-  padding: 10px 14px;
-}
-
-#missatge {
-  color: #059669;
-  font-size: 20px;
-  font-weight: 800;
-  margin-top: 16px;
-  min-height: 28px;
-}
-
 .casella {
   height: var(--mida);
   left: 0;
@@ -72,4 +47,55 @@ button {
 .casella:hover {
   background: rgba(255, 255, 255, 0.15);
   cursor: pointer;
+}
+
+.fitxa {
+  border: 2px solid #111827;
+  height: var(--mida);
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  transition: transform 350ms ease;
+  width: var(--mida);
+}
+
+.fitxa img {
+  display: block;
+  height: var(--mida);
+  width: var(--mida);
+}
+
+.controls {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+#info {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+button {
+  background: #111827;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: 800;
+  padding: 10px 14px;
+}
+
+button:hover {
+  background: #374151;
+}
+
+#missatge {
+  color: #059669;
+  font-size: 20px;
+  font-weight: 800;
+  margin-top: 16px;
+  min-height: 28px;
 }
