@@ -10,14 +10,17 @@ const ESTAT_RESOLT = [
   [7, 8, 0]
 ]
 
+/** Variables **/
 let tauler = []
 let moviments = 0
 let resolt = false
 
 const refFitxes = {}
 
+/** Construcció visual del joc */
 function init() {
 
+  /** Envia info al css **/
   const root = document.documentElement
   root.style.setProperty("--mida", midaCasella + "px")
   root.style.setProperty("--files", numFiles)
@@ -66,6 +69,7 @@ function trobaBuit() {
   }
 }
 
+/** Arriba, dreta, esquerra o avall **/
 function esAdjacent(fila, columna) {
   const buit = trobaBuit()
   const df = Math.abs(fila - buit.fila)
@@ -73,6 +77,7 @@ function esAdjacent(fila, columna) {
   return df + dc === 1
 }
 
+/** Jugant  **/
 function clicCasella(fila, columna) {
   if (resolt) return
   if (!esAdjacent(fila, columna)) return
@@ -86,6 +91,7 @@ function clicCasella(fila, columna) {
   moviments++
   actualitzaDOM()
 
+  /** Comparació **/
   if (comprovaResolt()) {
     resolt = true
     document.getElementById("missatge").textContent =
@@ -104,6 +110,7 @@ function comprovaResolt() {
   return true
 }
 
+/**Moviment visual **/
 function actualitzaDOM() {
   for (let fila = 0; fila < numFiles; fila++) {
     for (let columna = 0; columna < numColumnes; columna++) {
@@ -124,6 +131,7 @@ function barejaTauler() {
 
   let ultimDireccio = -1
 
+  /**Moviments **/
   for (let i = 0; i < 200; i++) {
     const buit = trobaBuit()
 
